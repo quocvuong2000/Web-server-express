@@ -1,0 +1,22 @@
+extends ../layouts/common.pug
+
+block content
+    h1 Users 
+    .warp.d-flex.align-item-strech.justify-content-between
+        a.btn.btn-primary(href="/users/create") new
+        form(action="/users/search" method="get" class="d-flex")
+            input(type="text" name="q" class="form-control")
+            button(class="btn btn-primary") Search
+
+    table.table 
+        tr 
+            th User 
+            th Phone 
+            th Actions
+        
+        each user in users 
+            tr 
+                td= user.name
+                td= user.phone
+                td  
+                    a.btn.btn-light(href="/users/" + user.id) view 

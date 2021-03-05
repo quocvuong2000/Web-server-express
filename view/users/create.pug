@@ -1,0 +1,16 @@
+extends ../layouts/common.pug
+
+block content
+    h1 Create new user 
+
+    if errors 
+        each error in errors 
+            .alert.alert-danger= error
+
+    form(action="/users/create" method="post")
+        d-flex.align-item.strech.justify-content-between
+            label.form-label(for="name") Name
+            input.form-control#name(name="name" type="text" value= values.name) 
+            label.form-label(for="phone") Phone
+            input.form-control#phone(name="phone" type="text" value= values.phone) 
+        button.btn.btn-primary.mt-2(type="submit") Submit
