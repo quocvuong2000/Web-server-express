@@ -1,5 +1,7 @@
 const db = require("../db");
 const { nanoid } = require("nanoid");
+
+
 const idlength = 5;
 
 module.exports.index = (req, res) => {
@@ -16,7 +18,6 @@ module.exports.search =  (req, res) => {
       .filter((user) => {
         return user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
       });
-  
     res.render("users/index", {
       users: searchResult,
     });
@@ -25,7 +26,7 @@ module.exports.search =  (req, res) => {
   module.exports.postCreate = (req, res) => {
     // Add a post
     req.body.id  = nanoid(idlength);
-    
+    req.body.avatar = req.file.path.split("\\").slice(1).join("/");
 
     db.get("users").push(req.body).write();
     res.redirect("/users");

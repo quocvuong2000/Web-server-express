@@ -7,10 +7,12 @@ block content
         each error in errors 
             .alert.alert-danger= error
 
-    form(action="/users/create" method="post")
+    form(action="/users/create" method="post" enctype="multipart/form-data") 
         d-flex.align-item.strech.justify-content-between
             label.form-label(for="name") Name
             input.form-control#name(name="name" type="text" value= values?values.name:"") 
             label.form-label(for="phone") Phone
             input.form-control#phone(name="phone" type="text" value= values?values.phone:"") 
+            label.form-label(for="avatar") avatar
+            input.form-control#avatar(name="avatar" type="file")
         button.btn.btn-primary.mt-2(type="submit") Submit
