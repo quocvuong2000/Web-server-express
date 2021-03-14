@@ -8,6 +8,8 @@ const userRoute = require("./routes/users.route");
 const authRoute = require("./routes/auth.route");
 const authMiddleware = require("./middleware/auth.middleware"); 
 const productRoute = require("./routes/product.route");
+const cartRoute = require("./routes/cart.route");
+const sessionMiddleware = require("./middleware/session.middleware");
 
 app.use(cookieParser(process.env.SESSION_SERECT))
 app.set("view engine", "pug");
@@ -15,6 +17,7 @@ app.set("views", "./view");
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 // app.use(cookieParser());
+app.use(sessionMiddleware);
 
 //home
 app.get("/", (req, res) => {
@@ -24,6 +27,8 @@ app.get("/", (req, res) => {
 app.use("/users",authMiddleware.requireAuth,userRoute);
 app.use("/auth",authRoute);
 app.use("/products",productRoute);
+app.use("/cart",cartRoute);
+
 app.use(express.static('public'))
 
 
